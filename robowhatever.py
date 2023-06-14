@@ -28,13 +28,25 @@ def main():
     cmd.yawSpeed = 0.0
     cmd.reserve = 0
 
-    for i in range(2000):
-        udp.Recv()
-        udp.GetRecv()
-        print(state.motorState[0].temperature)
+#    for i in range(2000):
+#        udp.Recv()
+#        udp.GetRecv(state)
+#        print(state.motorState[0].temperature)
+#        udp.SetSend(cmd)
+#        udp.Send()
+#        time.sleep(dt)
+
+    for i in range (int(4/dt)):
+        cmd.mode = 6 # stand
         udp.SetSend(cmd)
         udp.Send()
         time.sleep(dt)
 
-   main()
+    for i in range (int(2/dt)):
+        cmd.mode = 5 # lay
+        udp.SetSend(cmd)
+        udp.Send()
+        time.sleep(dt)
+
+main()
 
